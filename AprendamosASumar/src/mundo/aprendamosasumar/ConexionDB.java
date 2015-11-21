@@ -29,4 +29,8 @@ public class ConexionDB {
     private Connection conexion;
     
     public Connection getConexion(){return conexion;}
+    
+    public void setConexion(Connection conexion) {
+    this.conexion = conexion;
+}
 }
