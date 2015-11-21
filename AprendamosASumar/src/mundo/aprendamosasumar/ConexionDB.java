@@ -12,41 +12,90 @@ import java.sql.*;
  * @author Andrea
  */
 public class ConexionDB {
-  
-//    public static void main (String args []) throws SQLException{
-//        DriverManager.registerDriver (new oracle.jdbc.driver.OracleDriver());
-//        Connection conexion = DriverManager.getConnection
-//        ("jdbc:oracle:thin:@localhost:1521:XE", "ia", "123");
-//        try (
-//            Statement stmt = conexion.createStatement()){
-//            ResultSet rset =
-//            stmt.executeQuery("select BANNER from SYS.V_$VERSION");
-//            while (rset.next())
-//            System.out.println (rset.getString(1));   // Print col 1
-//            }          
-//    }  
     
     private Connection conexion;
     
-    public Connection getConexion(){return conexion;}
+    public Connection getConexion(){
+        return conexion;
+    }
     
     public void setConexion(Connection conexion) {
-    this.conexion = conexion;
-}
+        this.conexion = conexion;
+    }
     
-     public ConexionDB conectar() {
-    try {
-        Class.forName("oracle.jdbc.OracleDriver");
-        String BaseDeDatos = "jdbc:oracle:thin:@localhost:1521:XE";
-         
-        conexion = DriverManager.getConnection(BaseDeDatos, "ia","123");
-        if (conexion != null) {
-            System.out.println("Conexion exitosa!");
-        } else {
-            System.out.println("Conexion fallida!");
+    public ConexionDB conectar() {
+        try {
+            Class.forName("oracle.jdbc.OracleDriver");
+            String BaseDeDatos = "jdbc:oracle:thin:@localhost:1521:XE";
+
+            conexion = DriverManager.getConnection(BaseDeDatos, "ia","123");
+            if (conexion != null) {
+                System.out.println("Conexion exitosa!");
+            } else {
+                System.out.println("Conexion fallida!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }        return this;
+    }
+    
+    
+    /*
+    * Ejecuta sentencias en la base de datos
+    */
+    public boolean ejecutar(String sql) {
+        try{
+            Statement sentencia;
+            sentencia = getConexion().createStatement(ResultSet.TYPE_FORWARD_ONLY,  ResultSet.CONCUR_READ_ONLY);
+            sentencia.executeUpdate(sql);
+            getConexion().commit();
+            sentencia.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }        return this;
-}
+        return true;
+    }
+    
+    
+    /*
+    * Realiza consultas en la base de datos
+    */
+    public ResultSet consultar(String sql) {
+        ResultSet resultado = null;
+        try {
+            Statement sentencia;
+            sentencia = getConexion().createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            resultado = sentencia.executeQuery(sql);
+            getConexion().commit();
+        } catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }        
+        return resultado;
+    }
+    
+    
+    /*
+    public static void main(String[] args) {
+        ConexionDB baseDatos = new ConexionDB().conectar();        
+        if (baseDatos.ejecutar("INSERT INTO NIVEL(CODNIVEL,DESCRIPCION) VALUES(2,'NIVEL 2')")) {
+            System.out.println("Ejecucion correcta!");
+        } else {
+            System.out.println("Ocurrió un problema al ejecutar!");
+        }        
+        ResultSet resultados = baseDatos.consultar("SELECT * FROM NIVEL");        
+        if (resultados != null) {
+            try {
+                System.out.println("CODIGO NIVEL       DESCRIPCION");
+                System.out.println("--------------------------------");
+                while (resultados.next()) {
+                    System.out.println(""+resultados.getBigDecimal("CODNIVEL")+"       "+resultados.getString("DESCRIPCION"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }*/
+
 }
