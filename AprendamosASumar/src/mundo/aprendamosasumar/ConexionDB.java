@@ -36,11 +36,16 @@ public class ConexionDB {
     
      public ConexionDB conectar() {
     try {
-       .
-       .
+        Class.forName("oracle.jdbc.OracleDriver");
+        String BaseDeDatos = "jdbc:oracle:thin:@localhost:1521:ESQUEMA";
+         
+        conexion = DriverManager.getConnection(BaseDeDatos, "USUARIO","CONTRASEÑA");            if (conexion != null) {
+            System.out.println("Conexion exitosa!");
+        } else {
+            System.out.println("Conexion fallida!");
+        }
     } catch (Exception e) {
         e.printStackTrace();
-    }
-    return this;
+    }        return this;
 }
 }
