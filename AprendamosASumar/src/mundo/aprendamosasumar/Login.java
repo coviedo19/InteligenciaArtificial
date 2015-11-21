@@ -20,27 +20,27 @@ public static ConexionDB baseDatos=new ConexionDB();
 
     public static void main(String[] args) throws SQLException {
 
-        String temp,clave;
-        int codUsuario;
-        temp=JOptionPane.showInputDialog("Ingrese Usuario");
-        codUsuario=Integer.parseInt(temp);
-        clave=JOptionPane.showInputDialog("Ingrese contraseña");
+        String codUsuario,clave;
+        codUsuario=JOptionPane.showInputDialog("Ingrese Codigo de Usuario");
+        clave=JOptionPane.showInputDialog("Ingrese Contraseña");
         Usuario objUsuario=null;
         objUsuario=logeo(codUsuario,clave);
+        JOptionPane.showMessageDialog(null, objUsuario.getCODUSUARIO()+objUsuario.getNOMBREUSUARIO()+objUsuario.getCODNIVEL()+objUsuario.getPASWORD());
     }     
 
-    private static Usuario logeo(int codUsuario, String clave) throws SQLException {
+    private static Usuario logeo(String codUsuario, String clave) throws SQLException {
         ResultSet resultados = null;
         Usuario usuarioActual=null;
         try {
          baseDatos.conectar();
-        resultados=baseDatos.consultar("Select * From USUARIOS WHERE CODUSUARIO= "+usuario+"and PASSWORD="+"'"+clave+"'");
+        resultados=baseDatos.consultar("Select * From USUARIOS WHERE CODUSUARIO= "+codUsuario+"and PASSWORD="+"'"+clave+"'");
         if (resultados.next() == false){
                 JOptionPane.showMessageDialog(null, "Usuario no existe o combinacion erronea");
         }else{
                 String nombre=resultados.getString("NOMBREUSUARIO");
                 int nivel=resultados.getInt("CODNIVEL");
-                usuarioActual=new Usuario(codUsuario, nombre, nivel, clave);
+                int intcodusuario=Integer.parseInt(codUsuario);
+                usuarioActual=new Usuario(intcodusuario, nombre, nivel, clave);
                 JOptionPane.showMessageDialog(null, "Bienvenido "+resultados.getString("NOMBREUSUARIO"));
         }   
         } catch (Exception e) {
