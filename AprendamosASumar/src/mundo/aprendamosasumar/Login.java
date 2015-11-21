@@ -19,22 +19,28 @@ public static ConexionDB baseDatos=new ConexionDB();
 
 
     public static void main(String[] args) throws SQLException {
+
         String usuario,clave;
-        //usuario=JOptionPane.showInputDialog("Ingrese Usuario");
-        //clave=JOptionPane.showInputDialog("Ingrese contraseña");
-        //Usuario objUsuario=new Usuario();
-        logeo("1","23");
+        usuario=JOptionPane.showInputDialog("Ingrese Usuario");
+        clave=JOptionPane.showInputDialog("Ingrese contraseña");
+        Usuario objUsuario=new Usuario();
+        logeo(usuario,clave);
     }     
 
     private static void logeo(String usuario, String clave) throws SQLException {
         ResultSet resultados = null;
-        baseDatos.conectar();
+        try {
+         baseDatos.conectar();
         resultados=baseDatos.consultar("Select * From USUARIOS WHERE CODUSUARIO= "+usuario+"and PASSWORD="+"'"+clave+"'");
         if (resultados.next() == false){
                 JOptionPane.showMessageDialog(null, "Usuario no existe o combinacion erronea");
         }else{
                 JOptionPane.showMessageDialog(null, "Bienvenido "+resultados.getString("NOMBREUSUARIO"));
-        }            
+        }   
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Usuario invalido");
+        }
+                    
     }     
 }  
     
