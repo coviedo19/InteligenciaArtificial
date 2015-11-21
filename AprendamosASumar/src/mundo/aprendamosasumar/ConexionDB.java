@@ -28,5 +28,5 @@ public class ConexionDB {
     
     private Connection conexion;
     
-    public Connection getConexion{}
+    public Connection getConexion(){return conexion;}
 }
