@@ -31,9 +31,9 @@ public static ConexionDB baseDatos=new ConexionDB();
         baseDatos.conectar();
 
         resultados=baseDatos.consultar("Select * From USUARIOS WHERE NOMBREUSUARIO= "+usuario+"and password="+clave);
-        while (resultados.next()) {
-            System.out.println(""+resultados.getBigDecimal("CODUSUARIO")+"       "+resultados.getString("NOMBREUSUARIO"));
-        }
+//        while (resultados.next()) {
+//            System.out.println(""+resultados.getBigDecimal("CODUSUARIO")+"       "+resultados.getString("NOMBREUSUARIO"));
+//        }
         if (resultados != null){
             JOptionPane.showMessageDialog(null, "Bienvenido "+ usuario);
 
@@ -47,7 +47,7 @@ public static ConexionDB baseDatos=new ConexionDB();
         }
     }
  }
-   
+}  
     
  
 
