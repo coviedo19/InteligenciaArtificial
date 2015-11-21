@@ -19,6 +19,8 @@ public static ConexionDB baseDatos=new ConexionDB();
 
 
     public static void main(String[] args) throws SQLException {
+
+    public static void main(String[] args) throws SQLException {
         String usuario,clave;
         //usuario=JOptionPane.showInputDialog("Ingrese Usuario");
         //clave=JOptionPane.showInputDialog("Ingrese contraseña");
@@ -27,8 +29,12 @@ public static ConexionDB baseDatos=new ConexionDB();
     }     
 
     private static void logeo(String usuario, String clave) throws SQLException {
+
         ResultSet resultados = null;
-        baseDatos.conectar();
+        ResultSet resultados=baseDatos.consultar("Select * From USUARIOS WHERE NOMBREUSUARIO="+usuario+"and password="+clave);
+        JOptionPane.showMessageDialog(null,resultados.getInt("CODUSUARIO"));
+        if (resultados.getInt("CODUSUARIO")!=0){
+
         resultados=baseDatos.consultar("Select * From USUARIOS WHERE CODUSUARIO= "+usuario+"and PASSWORD="+"'"+clave+"'");
         
         while (resultados.next()) {
