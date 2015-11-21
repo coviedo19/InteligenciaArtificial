@@ -37,9 +37,10 @@ public class ConexionDB {
      public ConexionDB conectar() {
     try {
         Class.forName("oracle.jdbc.OracleDriver");
-        String BaseDeDatos = "jdbc:oracle:thin:@localhost:1521:ESQUEMA";
+        String BaseDeDatos = "jdbc:oracle:thin:@localhost:1521:XE";
          
-        conexion = DriverManager.getConnection(BaseDeDatos, "USUARIO","CONTRASEÑA");            if (conexion != null) {
+        conexion = DriverManager.getConnection(BaseDeDatos, "ia","123");
+        if (conexion != null) {
             System.out.println("Conexion exitosa!");
         } else {
             System.out.println("Conexion fallida!");
