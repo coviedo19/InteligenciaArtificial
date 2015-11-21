@@ -20,33 +20,31 @@ public static ConexionDB baseDatos=new ConexionDB();
 
     public static void main(String[] args) throws SQLException {
         String usuario,clave;
-        usuario=JOptionPane.showInputDialog("Ingrese Usuario");
-        clave=JOptionPane.showInputDialog("Ingrese contraseña");
+        //usuario=JOptionPane.showInputDialog("Ingrese Usuario");
+        //clave=JOptionPane.showInputDialog("Ingrese contraseña");
         //Usuario objUsuario=new Usuario();
-        logeo(usuario,clave);
+        logeo("1","23");
     }     
 
     private static void logeo(String usuario, String clave) throws SQLException {
         ResultSet resultados = null;
         baseDatos.conectar();
-
-        resultados=baseDatos.consultar("Select * From USUARIOS WHERE NOMBREUSUARIO= "+usuario+"and password="+clave);
-//        while (resultados.next()) {
-//            System.out.println(""+resultados.getBigDecimal("CODUSUARIO")+"       "+resultados.getString("NOMBREUSUARIO"));
-//        }
-        if (resultados != null){
-            JOptionPane.showMessageDialog(null, "Bienvenido "+ usuario);
-
-        resultados=baseDatos.consultar("Select  From USUARIOS WHERE NOMBREUSUARIO="+usuario+"and password="+clave);
-        if (resultados!= null){
-            JOptionPane.showMessageDialog(null, "Bienvenido"+usuario);
-
-        }       
-        else{ 
-            JOptionPane.showMessageDialog(null, "Usuario no existe o combinacion erronea");
+        resultados=baseDatos.consultar("Select * From USUARIOS WHERE CODUSUARIO= "+usuario+"and PASSWORD="+"'"+clave+"'");
+        
+        while (resultados.next()) {
+            System.out.println(resultados.getInt("CODUSUARIO"));
         }
-    }
- }
+//        if (resultados != null){
+//            JOptionPane.showMessageDialog(null, "Bienvenido "+ usuario);
+//
+//        resultados=baseDatos.consultar("Select  From USUARIOS WHERE NOMBREUSUARIO="+usuario+"and password="+clave);
+//        if (resultados!= null){
+//            JOptionPane.showMessageDialog(null, "Bienvenido"+usuario);
+//
+//        }       
+//        else{ 
+//            JOptionPane.showMessageDialog(null, "Usuario no existe o combinacion erronea");
+    }     
 }  
     
  
