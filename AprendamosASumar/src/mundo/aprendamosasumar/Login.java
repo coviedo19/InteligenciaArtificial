@@ -19,8 +19,6 @@ public static ConexionDB baseDatos=new ConexionDB();
 
 
     public static void main(String[] args) throws SQLException {
-
-    public static void main(String[] args) throws SQLException {
         String usuario,clave;
         //usuario=JOptionPane.showInputDialog("Ingrese Usuario");
         //clave=JOptionPane.showInputDialog("Ingrese contraseña");
@@ -29,27 +27,14 @@ public static ConexionDB baseDatos=new ConexionDB();
     }     
 
     private static void logeo(String usuario, String clave) throws SQLException {
-
         ResultSet resultados = null;
-        ResultSet resultados=baseDatos.consultar("Select * From USUARIOS WHERE NOMBREUSUARIO="+usuario+"and password="+clave);
-        JOptionPane.showMessageDialog(null,resultados.getInt("CODUSUARIO"));
-        if (resultados.getInt("CODUSUARIO")!=0){
-
+        baseDatos.conectar();
         resultados=baseDatos.consultar("Select * From USUARIOS WHERE CODUSUARIO= "+usuario+"and PASSWORD="+"'"+clave+"'");
-        
-        while (resultados.next()) {
-            System.out.println(resultados.getInt("CODUSUARIO"));
-        }
-//        if (resultados != null){
-//            JOptionPane.showMessageDialog(null, "Bienvenido "+ usuario);
-//
-//        resultados=baseDatos.consultar("Select  From USUARIOS WHERE NOMBREUSUARIO="+usuario+"and password="+clave);
-//        if (resultados!= null){
-//            JOptionPane.showMessageDialog(null, "Bienvenido"+usuario);
-//
-//        }       
-//        else{ 
-//            JOptionPane.showMessageDialog(null, "Usuario no existe o combinacion erronea");
+        if (resultados.next() == false){
+                JOptionPane.showMessageDialog(null, "Usuario no existe o combinacion erronea");
+        }else{
+                JOptionPane.showMessageDialog(null, "Bienvenido "+resultados.getString("NOMBREUSUARIO"));
+        }            
     }     
 }  
     
