@@ -14,7 +14,7 @@ class Usuario {
     private int CODUSUARIO,CODNIVEL;
     private String NOMBREUSUARIO,PASWORD;
 
-    public Usuario(int CODUSUARIO, int CODNIVEL, String NOMBREUSUARIO, String PASWORD) {
+    public Usuario(int CODUSUARIO, String NOMBREUSUARIO, int CODNIVEL, String PASWORD) {
         this.CODUSUARIO = CODUSUARIO;
         this.CODNIVEL = CODNIVEL;
         this.NOMBREUSUARIO = NOMBREUSUARIO;
