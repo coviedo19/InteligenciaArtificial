@@ -33,4 +33,14 @@ public class ConexionDB {
     public void setConexion(Connection conexion) {
     this.conexion = conexion;
 }
+    
+     public ConexionDB conectar() {
+    try {
+       .
+       .
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return this;
+}
 }
