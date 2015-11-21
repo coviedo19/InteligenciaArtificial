@@ -25,13 +25,13 @@ public static ConexionDB baseDatos=new ConexionDB();
         temp=JOptionPane.showInputDialog("Ingrese Usuario");
         codUsuario=Integer.parseInt(temp);
         clave=JOptionPane.showInputDialog("Ingrese contraseña");
-        Usuario objUsuario;
-        ObjUsuario=logeo(codUsuario,clave);
+        Usuario objUsuario=null;
+        objUsuario=logeo(codUsuario,clave);
     }     
 
     private static Usuario logeo(int codUsuario, String clave) throws SQLException {
         ResultSet resultados = null;
-        Usuario usuarioActual;
+        Usuario usuarioActual=null;
         try {
          baseDatos.conectar();
         resultados=baseDatos.consultar("Select * From USUARIOS WHERE CODUSUARIO= "+usuario+"and PASSWORD="+"'"+clave+"'");
