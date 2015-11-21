@@ -29,7 +29,7 @@ public static ConexionDB baseDatos=new ConexionDB();
 
     private static void logeo(String usuario, String clave) {
         baseDatos.conectar();
-        ResultSet resultados=baseDatos.consultar("Select * From USUARIOS WHERE NOMBREUSUARIO="+usuario+"and password="+clave);
+        ResultSet resultados=baseDatos.consultar("Select  From USUARIOS WHERE NOMBREUSUARIO="+usuario+"and password="+clave);
         if (resultados!= null){
             JOptionPane.showMessageDialog(null, "Bienvenido"+usuario);
         }       
