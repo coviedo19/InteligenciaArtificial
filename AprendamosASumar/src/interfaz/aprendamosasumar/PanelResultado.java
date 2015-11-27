@@ -93,7 +93,7 @@ public class PanelResultado extends JPanel implements ActionListener
     {
         if( ENVIAR.equals( e.getActionCommand( ) ) )
         {
-            //padre.reqFuncOpcion1( );
+            padre.validarRespuesta(Integer.parseInt(txtResultado.getText()));
         }  
     }
 

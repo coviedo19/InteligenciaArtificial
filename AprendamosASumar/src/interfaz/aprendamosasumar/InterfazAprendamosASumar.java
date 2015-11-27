@@ -12,8 +12,9 @@ import java.awt.geom.Line2D;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import mundo.aprendamosasumar.AprendamosASumar;
 
-
+//
 
 /**
  * Ventana principal de la aplicación
@@ -23,6 +24,8 @@ public class InterfazAprendamosASumar extends JFrame{
     // Atributos
     // -----------------------------------------------------------------
 
+    private AprendamosASumar aprendamosASumar;
+    
     // -----------------------------------------------------------------
     // Atributos de Interfaz
     // -----------------------------------------------------------------
@@ -42,13 +45,18 @@ public class InterfazAprendamosASumar extends JFrame{
      * Constructor de la interfaz
      */
     public InterfazAprendamosASumar( )
-    {        
+    {
+
+        aprendamosASumar = new AprendamosASumar();  
+        
         //Crea la interfaz
         setTitle( "Triángulo" );
         getContentPane( ).setLayout( new BorderLayout( ) );
         setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
         setResizable(false);
         setLocationRelativeTo(this);
+        
+        
         
         panelImagen = new PanelImagen( );
         getContentPane( ).add( panelImagen, BorderLayout.NORTH );
@@ -64,6 +72,10 @@ public class InterfazAprendamosASumar extends JFrame{
     // Métodos
     // -----------------------------------------------------------------
 
+    public void validarRespuesta(int valorIngresado){        
+        aprendamosASumar.validarRespuesta(valorIngresado);
+    }
+    
     /**
      * Repinta el triángulo y los valores
      *  
