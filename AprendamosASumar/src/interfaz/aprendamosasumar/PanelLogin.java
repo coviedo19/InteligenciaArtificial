@@ -216,14 +216,6 @@ InterfazAprendamosASumar interfaz;
     private javax.swing.JTextField textUsuario;
     // End of variables declaration//GEN-END:variables
 
-public String traeUsuario(){
-     String usuario=textUsuario.getText();
-     return usuario;
-}
 
-public String traeClave(){
-     String clave=textClave.getText();
-     return clave;
-             }
 
 }
