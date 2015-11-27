@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Andrea
+ * @author Andrea _T
  */
 public class AprendamosASumar {
     
