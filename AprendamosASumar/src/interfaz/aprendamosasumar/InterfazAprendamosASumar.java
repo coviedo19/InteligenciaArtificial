@@ -98,6 +98,8 @@ public class InterfazAprendamosASumar extends JFrame{
     {
         PanelLogin panelLogin=new PanelLogin();
         panelLogin.setVisible(true);
+        
+        
        // InterfazAprendamosASumar interfaz = new InterfazAprendamosASumar( );
         //interfaz.setVisible( true );
     }
