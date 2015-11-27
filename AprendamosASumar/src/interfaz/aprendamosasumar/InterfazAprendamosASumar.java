@@ -8,11 +8,13 @@ package interfaz.aprendamosasumar;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.geom.Line2D;
+import java.sql.SQLException;
 
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import mundo.aprendamosasumar.AprendamosASumar;
+import mundo.aprendamosasumar.Usuario;
 
 //
 
@@ -37,6 +39,8 @@ public class InterfazAprendamosASumar extends JFrame{
     
     private PanelResultado panelResultado;
     private PanelLogin panellogin;
+    private mundo.aprendamosasumar.Login inicioSesion;
+    private mundo.aprendamosasumar.Usuario usuario=null;
     // -----------------------------------------------------------------
     // Constructores
     // -----------------------------------------------------------------
@@ -85,6 +89,10 @@ public class InterfazAprendamosASumar extends JFrame{
         panelImagen.repaint( );       
     }
     
+    public void logeo(String u, String c) throws SQLException{
+        usuario=inicioSesion.logeo(u, c);
+    }
+    
     
     // -----------------------------------------------------------------
     // Main
@@ -98,7 +106,7 @@ public class InterfazAprendamosASumar extends JFrame{
     {
         PanelLogin panelLogin=new PanelLogin();
         panelLogin.setVisible(true);
-        
+               
         
        // InterfazAprendamosASumar interfaz = new InterfazAprendamosASumar( );
         //interfaz.setVisible( true );
