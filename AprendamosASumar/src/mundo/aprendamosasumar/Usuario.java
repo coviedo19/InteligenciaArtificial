@@ -9,7 +9,7 @@ package mundo.aprendamosasumar;
  *
  * @author JorgeArmando
  */
-class Usuario {
+public class Usuario {
     
     private int CODUSUARIO,CODNIVEL;
     private String NOMBREUSUARIO,PASWORD;
