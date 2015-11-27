@@ -36,7 +36,7 @@ public class InterfazAprendamosASumar extends JFrame{
     private PanelImagen panelImagen;
     
     private PanelResultado panelResultado;
-
+    private PanelLogin panellogin;
     // -----------------------------------------------------------------
     // Constructores
     // -----------------------------------------------------------------
@@ -96,7 +96,9 @@ public class InterfazAprendamosASumar extends JFrame{
      */
     public static void main( String[] args )
     {
-        InterfazAprendamosASumar interfaz = new InterfazAprendamosASumar( );
-        interfaz.setVisible( true );
+        PanelLogin panelLogin=new PanelLogin();
+        panelLogin.setVisible(true);
+       // InterfazAprendamosASumar interfaz = new InterfazAprendamosASumar( );
+        //interfaz.setVisible( true );
     }
 }
