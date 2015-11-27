@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -76,6 +77,9 @@ public class ConexionDB {
     }
     
     
+    
+    
+    
     /*
     public static void main(String[] args) {
         ConexionDB baseDatos = new ConexionDB().conectar();        
@@ -84,13 +88,14 @@ public class ConexionDB {
         } else {
             System.out.println("Ocurrió un problema al ejecutar!");
         }        
-        ResultSet resultados = baseDatos.consultar("SELECT * FROM NIVEL");        
+        ResultSet resultados = baseDatos.consultar("Select * From USUARIOS where CODUSUARIO=1 AND PASSWORD='23'");        
         if (resultados != null) {
             try {
                 System.out.println("CODIGO NIVEL       DESCRIPCION");
                 System.out.println("--------------------------------");
                 while (resultados.next()) {
-                    System.out.println(""+resultados.getBigDecimal("CODNIVEL")+"       "+resultados.getString("DESCRIPCION"));
+                    //System.out.println(""+resultados.getBigDecimal("CODNIVEL")+"       "+resultados.getString("DESCRIPCION"));
+                    System.out.println(""+resultados.getBigDecimal("CODUSUARIO"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
