@@ -28,14 +28,14 @@ public static ConexionDB baseDatos=new ConexionDB();
         JOptionPane.showMessageDialog(null, objUsuario.getCODUSUARIO()+objUsuario.getNOMBREUSUARIO()+objUsuario.getCODNIVEL()+objUsuario.getPASWORD());
     }   */  
 
-    private static Usuario logeo(String codUsuario, String clave) throws SQLException {
+    public static Usuario logeo(String codUsuario, String clave) throws SQLException {
         ResultSet resultados = null;
         Usuario usuarioActual=null;
         try {
          baseDatos.conectar();
         resultados=baseDatos.consultar("Select * From USUARIOS WHERE CODUSUARIO= "+codUsuario+"and PASSWORD="+"'"+clave+"'");
         if (resultados.next() == false){
-                JOptionPane.showMessageDialog(null, "Usuario no existe o combinacion erronea");
+                JOptionPane.showMessageDialog(null, "Usuario no existe o Combinacion de usuario y clave erronea");
         }else{
                 String nombre=resultados.getString("NOMBREUSUARIO");
                 int nivel=resultados.getInt("CODNIVEL");
@@ -44,7 +44,7 @@ public static ConexionDB baseDatos=new ConexionDB();
                 JOptionPane.showMessageDialog(null, "Bienvenido "+resultados.getString("NOMBREUSUARIO"));
         }   
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Usuario invalido");
+            JOptionPane.showMessageDialog(null, "Formato de Codigo de usuario invalido");
         }
       return usuarioActual;              
     }     
