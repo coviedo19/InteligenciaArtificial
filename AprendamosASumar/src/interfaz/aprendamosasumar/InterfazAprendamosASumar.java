@@ -222,4 +222,20 @@ public class InterfazAprendamosASumar extends JFrame{
     }
 
     
+    
+    public boolean pruebaNivel(int nivelUsuario, float porcentAprendizaje){
+        boolean pruebaExitosa=false;
+        int respuestaUsuario;
+        int respuestasCorrectas=0;
+        for (int i = 0; i < 5; i++) {
+            respuestaUsuario=xxx.gettext();
+            if(respuestaUsuario==imagen.getResultado()){
+                respuestasCorrectas++;
+            }
+        }
+        if(respuestasCorrectas>=4){
+            pruebaExitosa=true;
+        }
+        return pruebaExitosa;
+    }
 }
