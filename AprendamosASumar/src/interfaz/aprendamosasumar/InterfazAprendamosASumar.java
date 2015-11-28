@@ -89,8 +89,14 @@ public class InterfazAprendamosASumar extends JFrame{
         panelImagen.repaint( );       
     }
     
-    public void logeo(String u, String c) throws SQLException{
+    public boolean logeo(String u, String c) throws SQLException{
+        boolean existe=false;
+        usuario=null;
         usuario=inicioSesion.logeo(u, c);
+        if(usuario!=null) {
+            existe=true;
+        }
+        return existe;
     }
     
     
