@@ -95,6 +95,7 @@ public class InterfazAprendamosASumar extends JFrame{
         usuario=inicioSesion.logeo(u, c);
         if(usuario!=null) {
             existe=true;
+            decideActividad(usuario);
         }
         return existe;
     }
@@ -116,5 +117,23 @@ public class InterfazAprendamosASumar extends JFrame{
         
        // InterfazAprendamosASumar interfaz = new InterfazAprendamosASumar( );
         //interfaz.setVisible( true );
+    }
+
+    private void decideActividad(Usuario usuario) {
+        
+        if (usuario.getCODNIVEL()== 4){
+         determinarNivel(usuario);
+     }
+     else{
+         enseñarASumar();
+     }
+    }
+
+    private void determinarNivel(Usuario usuario) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void enseñarASumar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
