@@ -8,12 +8,16 @@ package interfaz.aprendamosasumar;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.geom.Line2D;
-import java.sql.SQLException;
+import java.sql.*;
+import java.sql.ResultSet;
 
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import mundo.aprendamosasumar.AprendamosASumar;
+import mundo.aprendamosasumar.ConexionDB;
+import mundo.aprendamosasumar.Imagen;
+import static mundo.aprendamosasumar.Login.baseDatos;
 import mundo.aprendamosasumar.Usuario;
 
 //
@@ -25,7 +29,7 @@ public class InterfazAprendamosASumar extends JFrame{
     // -----------------------------------------------------------------
     // Atributos
     // -----------------------------------------------------------------
-
+    public static ConexionDB baseDatos=new ConexionDB();
     private AprendamosASumar aprendamosASumar;
     boolean usuarioExiste=false;
     // -----------------------------------------------------------------
@@ -36,6 +40,7 @@ public class InterfazAprendamosASumar extends JFrame{
      * Panel con el encabezado
      */
     private PanelImagen panelImagen;
+    private Imagen imagen;
     public static PanelLogin panelLogin;
     private PanelResultado panelResultado;
     private PanelLogin panellogin;
@@ -50,9 +55,15 @@ public class InterfazAprendamosASumar extends JFrame{
      */
     public InterfazAprendamosASumar( )
     {
+  
 
         aprendamosASumar = new AprendamosASumar();  
-        
+
+    /**
+     *
+     */
+    
+                
         //Crea la interfaz
         setTitle( "Triángulo" );
         getContentPane( ).setLayout( new BorderLayout( ) );
@@ -89,6 +100,35 @@ public class InterfazAprendamosASumar extends JFrame{
         panelImagen.repaint( );       
     }
     
+        public void practicarNivel (int nivel){
+        
+        int correctas =0;
+        while (correctas<=8){
+        // Metodo para pintar imagen
+            int iResultado = imagen.getResultado();           
+            int pResultado = panelResultado.resultado();
+        
+            if (iResultado == pResultado){
+                correctas= correctas+1;
+            }
+        }
+    }
+    
+    public void calculoEstiloAprendizaje(){
+        ResultSet resultados = null;
+        
+        try {
+            baseDatos.conectar();
+            resultados=baseDatos.consultar("Select * From USUARIOS WHERE CODUSUARIO= "+codUsuario+" and PASSWORD="+"'"+clave+"'");
+            if (resultados.next() == false){
+            } 
+          
+        } 
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Formato de Codigo de usuario invalido");
+        }
+    }
+    
     public void logeo(String u, String c) throws SQLException{
         usuarioExiste=false;
         usuario=null;
@@ -101,6 +141,10 @@ public class InterfazAprendamosASumar extends JFrame{
             decideActividad(usuario);
         }
     }
+    
+
+    
+            
     
     
     // -----------------------------------------------------------------
