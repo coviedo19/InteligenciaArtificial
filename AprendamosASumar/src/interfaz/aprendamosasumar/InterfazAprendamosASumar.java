@@ -43,9 +43,10 @@ public class InterfazAprendamosASumar extends JFrame{
     private Imagen imagen;
     public static PanelLogin panelLogin;
     private PanelResultado panelResultado;
+    private Usuario usuario;
     private PanelLogin panellogin;
     private mundo.aprendamosasumar.Login inicioSesion;
-    private mundo.aprendamosasumar.Usuario usuario=null;
+
     // -----------------------------------------------------------------
     // Constructores
     // -----------------------------------------------------------------
@@ -100,8 +101,31 @@ public class InterfazAprendamosASumar extends JFrame{
         panelImagen.repaint( );       
     }
     
-        public void practicarNivel (int nivel){
+    public void enseñarASumar(int nivel){
         
+       boolean superado= false;
+    
+        //muestra imagen actividad 01
+        
+        practicarNivel(nivel);
+        superado= this.pruebaNivel(nivel);
+        if (superado == true){
+            baseDatos.conectar();
+            int nivelUsuario= usuario.getCODNIVEL();
+            nivelUsuario =+1;
+            baseDatos.ejecutar("update USUARIOS set CODNIVEL=" + nivelUsuario );        
+        }
+        
+        else {
+            JOptionPane.showMessageDialog(null, "Debes intentarlo nuevamente desde el inicio del nivel");
+        }
+        
+        
+        
+    
+    }
+    
+    public void practicarNivel (int nivel){
         int correctas =0;
         while (correctas<=8){
         // Metodo para pintar imagen
@@ -114,19 +138,37 @@ public class InterfazAprendamosASumar extends JFrame{
         }
     }
     
-    public void calculoEstiloAprendizaje(){
-        ResultSet resultados = null;
+    public boolean pruebaNivel(int nivel){
+        boolean superado= false;
         
+        return superado;
+    }
+    public int[] calculoEstiloAprendizaje(){
+        ResultSet resultado = null;
+        int [] estiloAprendizaje = new int[2];
+              
         try {
             baseDatos.conectar();
-            resultados=baseDatos.consultar("Select * From USUARIOS WHERE CODUSUARIO= "+codUsuario+" and PASSWORD="+"'"+clave+"'");
-            if (resultados.next() == false){
+            int codUsuario= usuario.getCODUSUARIO();
+            
+            resultado=baseDatos.consultar("Select VISUAL, AUDITIVO, KINESTECICO from CORRECTAS_X_ESTILO_APRENDIZAJE where CODUSUARIO = " +codUsuario);
+
+            if (resultado.next() == false){
+                return estiloAprendizaje;
             } 
+            else{
+                estiloAprendizaje[0]= resultado.getInt("VISUAL");
+                estiloAprendizaje[1]= resultado.getInt("AUDITIVO");
+                estiloAprendizaje[2] = resultado.getInt("KINESTECICO");           
+                
+               
+            }
           
         } 
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Formato de Codigo de usuario invalido");
         }
+        return estiloAprendizaje;
     }
     
     public void logeo(String u, String c) throws SQLException{
@@ -166,20 +208,18 @@ public class InterfazAprendamosASumar extends JFrame{
     }
 
     private void decideActividad(Usuario usuario) {
-        
-        if (usuario.getCODNIVEL()== 4){
-         determinarNivel(usuario);
-     }
-     else{
-         enseñarASumar();
-     }
+        int nivel = usuario.getCODNIVEL();
+        if (nivel== 4){
+            determinarNivel(usuario);
+        }
+        else{
+            enseñarASumar(nivel);
+        }
     }
 
     private void determinarNivel(Usuario usuario) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void enseñarASumar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }
