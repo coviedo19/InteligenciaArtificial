@@ -201,8 +201,9 @@ public class InterfazAprendamosASumar extends JFrame{
             panelLogin.dispose();
             InterfazAprendamosASumar interfaz = new InterfazAprendamosASumar( );
             interfaz.setVisible( true );
-            //usuarioExiste=true;
-            //decideActividad(usuario);
+//            usuarioExiste=true;
+//            decideActividad(usuario);
+            
         }
     }
     
@@ -210,10 +211,7 @@ public class InterfazAprendamosASumar extends JFrame{
     public void iniciarSesion(){
         panelLogin=new PanelLogin(this);
         panelLogin.setVisible(true);
-    }
-
-
-    
+    }   
             
     
 
@@ -235,13 +233,12 @@ public class InterfazAprendamosASumar extends JFrame{
     }
 
     
-    private void decideActividad(Usuario usuario) {
-        int nivel = usuario.getCODNIVEL();
-        if (nivel== 4){
+    private void decideActividad(Usuario usuario){        
+        if (usuario.getCODNIVEL()== 4){
             determinarNivel(usuario);
         }
         else{
-            enseñarASumar(nivel);
+            enseñarASumar(usuario.getCODNIVEL());
         }
     }
     
