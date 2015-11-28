@@ -81,6 +81,15 @@ public class PanelResultado extends JPanel implements ActionListener
 
     }
 
+    public JTextField getTxtResultado() {
+        return txtResultado;
+    }
+
+    public int resultado (){
+    int r = Integer.parseInt(txtResultado.getText());
+    return r;        
+    }
+    
     //-----------------------------------------------------------------
     // Métodos
     //-----------------------------------------------------------------
