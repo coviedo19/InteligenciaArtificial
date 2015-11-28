@@ -36,7 +36,7 @@ public class InterfazAprendamosASumar extends JFrame{
      * Panel con el encabezado
      */
     private PanelImagen panelImagen;
-    
+    public static PanelLogin panelLogin;
     private PanelResultado panelResultado;
     private PanelLogin panellogin;
     private mundo.aprendamosasumar.Login inicioSesion;
@@ -94,6 +94,9 @@ public class InterfazAprendamosASumar extends JFrame{
         usuario=null;
         usuario=inicioSesion.logeo(u, c);
         if (usuario!=null){
+            panelLogin.dispose();
+            InterfazAprendamosASumar interfaz = new InterfazAprendamosASumar( );
+            interfaz.setVisible( true );
             usuarioExiste=true;
             decideActividad(usuario);
         }
@@ -110,7 +113,7 @@ public class InterfazAprendamosASumar extends JFrame{
      */
     public static void main( String[] args )
     {
-        PanelLogin panelLogin=new PanelLogin();
+        panelLogin=new PanelLogin();
         panelLogin.setVisible(true);
                
         
