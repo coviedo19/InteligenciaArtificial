@@ -228,7 +228,7 @@ public class InterfazAprendamosASumar extends JFrame{
         int respuestaUsuario;
         int respuestasCorrectas=0;
         for (int i = 0; i < 5; i++) {
-            respuestaUsuario=xxx.gettext();
+            respuestaUsuario=xxx.gettext();  
             if(respuestaUsuario==imagen.getResultado()){
                 respuestasCorrectas++;
             }
