@@ -10,15 +10,21 @@ import java.awt.Color;
 import java.awt.geom.Line2D;
 import java.sql.*;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import mundo.aprendamosasumar.AprendamosASumar;
+
+import mundo.aprendamosasumar.*;
+
 import mundo.aprendamosasumar.ConexionDB;
 import mundo.aprendamosasumar.Imagen;
 import static mundo.aprendamosasumar.Login.baseDatos;
 import mundo.aprendamosasumar.Usuario;
+
 
 //
 
@@ -31,7 +37,10 @@ public class InterfazAprendamosASumar extends JFrame{
     // -----------------------------------------------------------------
     public static ConexionDB baseDatos=new ConexionDB();
     private AprendamosASumar aprendamosASumar;
-    boolean usuarioExiste=false;
+    private Imagen imagen;
+    private Usuario usuario;
+  
+    
     // -----------------------------------------------------------------
     // Atributos de Interfaz
     // -----------------------------------------------------------------
@@ -39,11 +48,9 @@ public class InterfazAprendamosASumar extends JFrame{
     /**
      * Panel con el encabezado
      */
-    private PanelImagen panelImagen;
-    private Imagen imagen;
+    private PanelImagen panelImagen;    
     public static PanelLogin panelLogin;
-    private PanelResultado panelResultado;
-    private Usuario usuario;
+    private PanelResultado panelResultado;    
     private PanelLogin panellogin;
     private mundo.aprendamosasumar.Login inicioSesion;
 
@@ -66,15 +73,15 @@ public class InterfazAprendamosASumar extends JFrame{
     
                 
         //Crea la interfaz
-        setTitle( "Triángulo" );
+        setTitle( "Aprendam" );
         getContentPane( ).setLayout( new BorderLayout( ) );
         setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
         setResizable(false);
-        setLocationRelativeTo(this);
+        //setLocationRelativeTo(this);
         
         
         
-        panelImagen = new PanelImagen( );
+        panelImagen = new PanelImagen("src/imagen/"+traerImagen().getRuta());
         getContentPane( ).add( panelImagen, BorderLayout.NORTH );
         
         panelResultado = new PanelResultado(this);
@@ -88,6 +95,16 @@ public class InterfazAprendamosASumar extends JFrame{
     // Métodos
     // -----------------------------------------------------------------
 
+    public Imagen traerImagen(){
+        try {
+            imagen = aprendamosASumar.traerImagen(4, 401, 1);
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazAprendamosASumar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return imagen;
+    }
+    
+    
     public void validarRespuesta(int valorIngresado){        
         aprendamosASumar.validarRespuesta(valorIngresado);
     }
@@ -101,6 +118,9 @@ public class InterfazAprendamosASumar extends JFrame{
         panelImagen.repaint( );       
     }
     
+
+    
+
     public void enseñarASumar(int nivel){
         
        boolean superado= false;
@@ -171,23 +191,32 @@ public class InterfazAprendamosASumar extends JFrame{
         return estiloAprendizaje;
     }
     
+
     public void logeo(String u, String c) throws SQLException{
-        usuarioExiste=false;
-        usuario=null;
-        usuario=inicioSesion.logeo(u, c);
+//        boolean usuarioExiste = false;
+//        panelLogin=new PanelLogin(this);
+//        panelLogin.setVisible(true);
+        usuario = inicioSesion.logeo(u, c);
         if (usuario!=null){
             panelLogin.dispose();
             InterfazAprendamosASumar interfaz = new InterfazAprendamosASumar( );
             interfaz.setVisible( true );
-            usuarioExiste=true;
-            decideActividad(usuario);
+            //usuarioExiste=true;
+            //decideActividad(usuario);
         }
     }
     
 
+    public void iniciarSesion(){
+        panelLogin=new PanelLogin(this);
+        panelLogin.setVisible(true);
+    }
+
+
     
             
     
+
     
     // -----------------------------------------------------------------
     // Main
@@ -197,16 +226,15 @@ public class InterfazAprendamosASumar extends JFrame{
      * Inicia la aplicación
      * @param args Parámetros no utilizados
      */
-    public static void main( String[] args )
-    {
-        panelLogin=new PanelLogin();
-        panelLogin.setVisible(true);
-               
+    public static void main( String[] args ){
+         InterfazAprendamosASumar i = new InterfazAprendamosASumar();
+         i.iniciarSesion();
         
        // InterfazAprendamosASumar interfaz = new InterfazAprendamosASumar( );
         //interfaz.setVisible( true );
     }
 
+    
     private void decideActividad(Usuario usuario) {
         int nivel = usuario.getCODNIVEL();
         if (nivel== 4){
@@ -216,19 +244,20 @@ public class InterfazAprendamosASumar extends JFrame{
             enseñarASumar(nivel);
         }
     }
+    
 
     private void determinarNivel(Usuario usuario) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    }  
+ 
     
     
-    public boolean pruebaNivel(int nivelUsuario, float porcentAprendizaje){
+    public boolean pruebaNivel2(int nivelUsuario){
         boolean pruebaExitosa=false;
         int respuestaUsuario;
         int respuestasCorrectas=0;
         for (int i = 0; i < 5; i++) {
-            respuestaUsuario=xxx.gettext();  
+            respuestaUsuario=0;//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA;  
             if(respuestaUsuario==imagen.getResultado()){
                 respuestasCorrectas++;
             }
@@ -237,5 +266,6 @@ public class InterfazAprendamosASumar extends JFrame{
             pruebaExitosa=true;
         }
         return pruebaExitosa;
+
     }
 }
