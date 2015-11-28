@@ -33,7 +33,7 @@ public class PanelImagen extends JPanel{
     /**
      * Constructor sin parámetros
      */
-    public PanelImagen( )
+    public PanelImagen(String ruta)
     {
         FlowLayout layout = new FlowLayout( );
         layout.setHgap( 100 );
@@ -41,7 +41,7 @@ public class PanelImagen extends JPanel{
         setLayout( layout );
         
         //Carga la imagen
-        ImageIcon icono = new ImageIcon( "imagenes/2.jpg" );
+        ImageIcon icono = new ImageIcon( ruta );
         
         //La agrega a la etiqueta
         imagen = new JLabel( "" );
