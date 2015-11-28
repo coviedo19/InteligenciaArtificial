@@ -18,7 +18,7 @@ public class Login {
 public static ConexionDB baseDatos=new ConexionDB();
 
 
-  /*  public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException {
 
         String codUsuario,clave;
         codUsuario=JOptionPane.showInputDialog("Ingrese Codigo de Usuario");
@@ -26,7 +26,7 @@ public static ConexionDB baseDatos=new ConexionDB();
         Usuario objUsuario=null;
         objUsuario=logeo(codUsuario,clave);
         JOptionPane.showMessageDialog(null, objUsuario.getCODUSUARIO()+objUsuario.getNOMBREUSUARIO()+objUsuario.getCODNIVEL()+objUsuario.getPASWORD());
-    }   */  
+    }    
 
     public static Usuario logeo(String codUsuario, String clave) throws SQLException {
         ResultSet resultados = null;
