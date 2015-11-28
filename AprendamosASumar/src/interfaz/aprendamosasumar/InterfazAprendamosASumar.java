@@ -27,7 +27,7 @@ public class InterfazAprendamosASumar extends JFrame{
     // -----------------------------------------------------------------
 
     private AprendamosASumar aprendamosASumar;
-    
+    boolean usuarioExiste=false;
     // -----------------------------------------------------------------
     // Atributos de Interfaz
     // -----------------------------------------------------------------
@@ -89,15 +89,14 @@ public class InterfazAprendamosASumar extends JFrame{
         panelImagen.repaint( );       
     }
     
-    public boolean logeo(String u, String c) throws SQLException{
-        boolean existe=false;
+    public void logeo(String u, String c) throws SQLException{
+        usuarioExiste=false;
         usuario=null;
         usuario=inicioSesion.logeo(u, c);
-        if(usuario!=null) {
-            existe=true;
+        if (usuario!=null){
+            usuarioExiste=true;
             decideActividad(usuario);
         }
-        return existe;
     }
     
     
