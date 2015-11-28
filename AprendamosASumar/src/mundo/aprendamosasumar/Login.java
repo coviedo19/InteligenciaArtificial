@@ -30,6 +30,7 @@ public static ConexionDB baseDatos=new ConexionDB();
 
     public static Usuario logeo(String codUsuario, String clave) throws SQLException {
         ResultSet resultados = null;
+
         Usuario usuarioActual=null;
         try {
          baseDatos.conectar();
