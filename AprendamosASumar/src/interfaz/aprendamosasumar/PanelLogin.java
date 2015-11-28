@@ -18,15 +18,16 @@ import mundo.aprendamosasumar.*;
  */
 public class PanelLogin extends javax.swing.JFrame {
     
-    
+    InterfazAprendamosASumar padre;
     /**
      * Creates new form PanelLogin
      */
-    public PanelLogin() {
+    public PanelLogin(InterfazAprendamosASumar elPadre) {
+        padre=elPadre;
         initComponents();
     }
 mundo.aprendamosasumar.Login inicioSesion;
-InterfazAprendamosASumar interfaz;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -162,9 +163,10 @@ InterfazAprendamosASumar interfaz;
     private void botonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoginActionPerformed
         String usuario=textUsuario.getText();
         String clave=textClave.getText();
-        interfaz=new InterfazAprendamosASumar();
+        //interfaz=new InterfazAprendamosASumar();
         try {
-            interfaz.logeo(usuario, clave);
+            padre.logeo(usuario, clave);
+            
         } catch (SQLException ex) {
             Logger.getLogger(PanelLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
